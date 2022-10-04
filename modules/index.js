@@ -47,14 +47,7 @@ exports.login = async (req,res) => {
     if(!users) return res.status(400).send("Email is not valid");
     
     const pass = await bcrypt.compare(req.body.password,users.password);
-    if(!pass) res.status(400).send("Password is Incorrect");
-
-    
-    User.findOneAndUpdate({email:req.body.email}, {isLogin: true}, (err, data) => {
-        if(err) console.log(err);
-        else console.log("Successfully updated the isLogin");
-
-    })
+    if(!pass) res.status(400).send("Password is Incorrect")
     
     const token = jwt.sign({_id:User._id},process.env.SECRET);
     res.header("auth",token,{httpOnly:true}).status(200).json({
@@ -65,6 +58,6 @@ exports.login = async (req,res) => {
 }
 
 exports.getUser = async (req,res) => {
-    const getDetail = await User.find({})
+    const getDetail = await User.find({_id:req.body._id})
    return res.status(200).send({getDetail})
 }

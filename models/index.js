@@ -20,11 +20,7 @@ const userSchema = mongoose.Schema({
     image:{
         type:Array,
         default:[],
-    },
-    isLogin: {
-        type: Boolean,
-        default: false
-    },
+    }
 
 },{timestamps:true})
 module.exports = mongoose.model("User",userSchema);
