@@ -58,6 +58,6 @@ exports.login = async (req,res) => {
 }
 
 exports.getUser = async (req,res) => {
-    const getDetail = await User.find({_id:req.body._id})
+    const getDetail = await User.find({_id:req.params._id})
    return res.status(200).send({getDetail})
 }
